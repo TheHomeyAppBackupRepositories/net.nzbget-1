@@ -1,6 +1,6 @@
 {
   "name": "net.nzbget",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "homepage": "https://github.com/edwinvdpol/net.nzbget#readme",
   "license": "SEE LICENSE",
   "author": {
@@ -10,7 +10,7 @@
   "funding": [
     {
       "type": "individual",
-      "url": "https://www.paypal.me/edwinvdpol"
+      "url": "https://paypal.me/edwinvdpol"
     }
   ],
   "main": "app.js",
@@ -21,16 +21,17 @@
   "engines": {
     "node": ">=12.16.1"
   },
-  "dependencies": {
-    "abort-controller": "^3.0.0",
-    "node-fetch": "^2.6.7",
-    "uuid": "^8.3.2"
-  },
   "scripts": {
     "lint": "eslint --ext .js,.ts --ignore-path .gitignore ."
   },
+  "dependencies": {
+    "abort-controller": "^3.0.0",
+    "homey-log": "^2.1.0",
+    "node-fetch": "^2.6.7",
+    "uuid": "^8.3.2"
+  },
   "devDependencies": {
-    "@types/homey": "npm:homey-apps-sdk-v3-types@^0.3.3",
+    "@types/homey": "npm:homey-apps-sdk-v3-types@^0.3.4",
     "eslint-config-athom": "^3.1.1"
   }
 }
