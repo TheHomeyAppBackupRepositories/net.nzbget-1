@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "net.nzbget",
-  "version": "1.3.3",
+  "version": "1.3.2",
   "compatibility": ">=5.0.0",
   "platforms": [
     "local"
@@ -61,22 +61,18 @@
       }
     }
   },
-  "bugs": {
-    "url": "https://community.homey.app/t/89040"
-  },
-  "homeyCommunityTopicId": 89040,
   "homepage": "https://nzbget.net",
-  "support": "https://community.homey.app/t/89040",
+  "support": "mailto:developer@edwinvandepol.nl",
   "flow": {
     "triggers": [
       {
         "title": {
-          "en": "Article cache changed",
+          "en": "Article cache has changed",
           "nl": "Artikelcache is veranderd"
         },
         "hint": {
-          "en": "This flowcard triggers when the article cache was changed.",
-          "nl": "Deze flowcard wordt geactiveerd wanneer de artikelcache veranderd werd."
+          "en": "This flowcard triggers when the article cache has changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer de artikelcache veranderd is."
         },
         "args": [
           {
@@ -93,8 +89,8 @@
           "nl": "Gemiddelde snelheid is veranderd"
         },
         "hint": {
-          "en": "This flowcard triggers when the average download speed was changed.",
-          "nl": "Deze flowcard wordt geactiveerd wanneer de gemiddelde downloadsnelheid veranderd werd."
+          "en": "This flowcard triggers when the average download speed has changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer de gemiddelde downloadsnelheid veranderd is."
         },
         "args": [
           {
@@ -147,8 +143,8 @@
           "nl": "Downloadsnelheid is veranderd"
         },
         "hint": {
-          "en": "This flowcard triggers when the download speed was changed.",
-          "nl": "Deze flowcard wordt geactiveerd wanneer de downloadsnelheid veranderd werd."
+          "en": "This flowcard triggers when the download speed has changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer de downloadsnelheid veranderd is."
         },
         "args": [
           {
@@ -165,8 +161,8 @@
           "nl": "Totaal gedownload is veranderd"
         },
         "hint": {
-          "en": "This flowcard triggers when the total downloaded was changed.",
-          "nl": "Deze flowcard wordt geactiveerd wanneer het totaal gedownload veranderd werd."
+          "en": "This flowcard triggers when the total downloaded has changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer het totaal gedownload veranderd is."
         },
         "args": [
           {
@@ -183,8 +179,8 @@
           "nl": "Vrije schijfruimte is veranderd"
         },
         "hint": {
-          "en": "This flowcard triggers when the free disk space was changed.",
-          "nl": "Deze flowcard wordt geactiveerd wanneer de vrije schijfruimte veranderd werd."
+          "en": "This flowcard triggers when the free disk space has changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer de vrije schijfruimte veranderd is."
         },
         "args": [
           {
@@ -237,8 +233,8 @@
           "nl": "Downloadlimiet is veranderd"
         },
         "hint": {
-          "en": "This flowcard triggers when the download limit was changed.",
-          "nl": "Deze flowcard wordt geactiveerd wanneer de downloadlimiet veranderd werd."
+          "en": "This flowcard triggers when the download limit has changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer de downloadlimiet veranderd is."
         },
         "args": [
           {
@@ -255,8 +251,8 @@
           "nl": "Downloadwachtrij is veranderd"
         },
         "hint": {
-          "en": "This flowcard triggers when the amount of files in queue was changed.",
-          "nl": "Deze flowcard wordt geactiveerd wanneer het aantal bestanden in de wachtrij veranderd werd."
+          "en": "This flowcard triggers when the amount of files in queue has changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer het aantal bestanden in de wachtrij veranderd is."
         },
         "args": [
           {
@@ -273,8 +269,8 @@
           "nl": "Nog te downloaden is veranderd"
         },
         "hint": {
-          "en": "This flowcard triggers when the download remaining was changed.",
-          "nl": "Deze flowcard wordt geactiveerd wanneer het nog te downloaden veranderd werd."
+          "en": "This flowcard triggers when the download remaining has changed.",
+          "nl": "Deze flowcard wordt geactiveerd wanneer het nog te downloaden veranderd is."
         },
         "args": [
           {
@@ -343,8 +339,8 @@
             "type": "number",
             "name": "download_rate",
             "title": {
-              "en": "download speed",
-              "nl": "downloadsnelheid"
+              "en": "Download speed",
+              "nl": "Downloadsnelheid"
             },
             "min": 0,
             "step": 1,
@@ -554,11 +550,11 @@
   "capabilities": {
     "article_cache": {
       "type": "number",
+      "decimals": 2,
       "title": {
         "en": "Article cache",
         "nl": "Artikel cache"
       },
-      "decimals": 2,
       "icon": "/assets/harddisk.svg",
       "insights": true,
       "getable": true,
@@ -569,11 +565,11 @@
     },
     "average_rate": {
       "type": "number",
+      "decimals": 2,
       "title": {
         "en": "Average speed",
         "nl": "Gemiddelde snelheid"
       },
-      "decimals": 2,
       "icon": "/assets/download-speed.svg",
       "insights": true,
       "getable": true,
@@ -595,11 +591,11 @@
     },
     "download_rate": {
       "type": "number",
+      "decimals": 2,
       "title": {
         "en": "Download speed",
         "nl": "Downloadsnelheid"
       },
-      "decimals": 2,
       "icon": "/assets/download-speed.svg",
       "insights": true,
       "getable": true,
@@ -610,11 +606,11 @@
     },
     "download_size": {
       "type": "number",
+      "decimals": 2,
       "title": {
         "en": "Total downloaded",
         "nl": "Totaal gedownload"
       },
-      "decimals": 2,
       "icon": "/assets/harddisk.svg",
       "getable": true,
       "setable": false,
@@ -670,11 +666,11 @@
     },
     "remaining_size": {
       "type": "number",
+      "decimals": 2,
       "title": {
         "en": "Download remaining",
         "nl": "Nog te downloaden"
       },
-      "decimals": 2,
       "icon": "/assets/harddisk.svg",
       "getable": true,
       "setable": false,
