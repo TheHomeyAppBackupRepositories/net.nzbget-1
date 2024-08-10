@@ -1,7 +1,7 @@
 'use strict';
 
 const Device = require('../../lib/Device');
-const { filled } = require('../../lib/Utils');
+const { blank } = require('../../lib/Utils');
 const Client = require('../../lib/Client');
 
 class NZBDevice extends Device {
@@ -27,45 +27,47 @@ class NZBDevice extends Device {
 
   // Handle sync data
   handleSyncData(data) {
+    if (blank(data)) return;
+
     this.log('Update device', JSON.stringify(data));
 
-    if (filled(data.ArticleCacheMB)) {
+    if ('ArticleCacheMB' in data) {
       this.setCapabilityValue('article_cache', parseFloat(data.ArticleCacheMB)).catch(this.error);
     }
 
-    if (filled(data.AverageDownloadRate)) {
+    if ('AverageDownloadRate' in data) {
       this.setCapabilityValue('average_rate', parseFloat(data.AverageDownloadRate / 1024000)).catch(this.error);
     }
 
-    if (filled(data.DownloadPaused)) {
+    if ('DownloadPaused' in data) {
       this.setCapabilityValue('download_enabled', !data.DownloadPaused).catch(this.error);
     }
 
-    if (filled(data.DownloadRate)) {
+    if ('DownloadRate' in data) {
       this.setCapabilityValue('download_rate', parseFloat(data.DownloadRate / 1024000)).catch(this.error);
     }
 
-    if (filled(data.DownloadedSizeMB)) {
+    if ('DownloadedSizeMB' in data) {
       this.setCapabilityValue('download_size', parseFloat(data.DownloadedSizeMB / 1024)).catch(this.error);
     }
 
-    if (filled(data.DownloadTimeSec)) {
+    if ('DownloadTimeSec' in data) {
       this.setCapabilityValue('download_time', this.toTime(Number(data.DownloadTimeSec))).catch(this.error);
     }
 
-    if (filled(data.FreeDiskSpaceMB)) {
+    if ('FreeDiskSpaceMB' in data) {
       this.setCapabilityValue('free_disk_space', Math.floor(data.FreeDiskSpaceMB / 1024)).catch(this.error);
     }
 
-    if (filled(data.DownloadLimit)) {
+    if ('DownloadLimit' in data) {
       this.setCapabilityValue('rate_limit', Number(data.DownloadLimit / 1024000)).catch(this.error);
     }
 
-    if (filled(data.RemainingSizeMB)) {
+    if ('RemainingSizeMB' in data) {
       this.setCapabilityValue('remaining_size', Number(data.RemainingSizeMB)).catch(this.error);
     }
 
-    if (filled(data.UpTimeSec)) {
+    if ('UpTimeSec' in data) {
       this.setCapabilityValue('uptime', this.toTime(data.UpTimeSec)).catch(this.error);
     }
 
@@ -102,14 +104,12 @@ class NZBDevice extends Device {
   async reload() {
     this.log('Reload');
 
-    // Wait until the driver is ready
-    await this.driver.ready();
-
     await this.call('reload');
 
     let device = this;
 
     // Trigger program reloaded flow card
+    await this.driver.ready();
     await this.homey.reloadedTrigger.trigger(device);
 
     device = null;
@@ -135,14 +135,12 @@ class NZBDevice extends Device {
   async shutdown() {
     this.log('Shutdown');
 
-    // Wait until the driver is ready
-    await this.driver.ready();
-
     await this.call('shutdown');
 
     let device = this;
 
     // Trigger program shutdown flow card
+    await this.driver.ready();
     await this.homey.shutdownTrigger.trigger(device);
 
     device = null;
@@ -156,11 +154,11 @@ class NZBDevice extends Device {
     let client;
 
     try {
-      client = new Client(this.getSettings());
+      client = new Client(this.getStore());
 
       return client.call(cmd, params);
     } catch (err) {
-      this.error('call error', err);
+      this.error('[Call]', err.toString());
       throw new Error(this.homey.__(err.message));
     } finally {
       client = null;
